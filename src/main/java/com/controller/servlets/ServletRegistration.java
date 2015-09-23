@@ -14,7 +14,7 @@ import java.util.HashMap;
 /**
  * Created by alekspribysh on 9/21/15.
  */
-@WebServlet(urlPatterns = {"/login", })
+@WebServlet(urlPatterns = {"/login" })
 public class ServletRegistration extends HttpServlet{
 
     ValidateUser valid = new ValidateUser();
