@@ -9,7 +9,9 @@ import java.util.HashMap;
  * Created by alekspribysh on 9/19/15.
  */
 public class ValidateUser {
-    UserDao user = new UserDao();
+    //UserDao user = new UserDao();
+
+    UserService user = new UserService();
 
     private boolean val;
 
@@ -65,14 +67,15 @@ public class ValidateUser {
 //    }
 
     public boolean validLoginPassword(String name, String password) throws SQLException {
+        System.out.println(user.getUser());
 
-        if (user.getUser().getObject(2).equals(name) && user.getUser().getObject(2).equals(password))
-
-        {
-            val = true;
-        } else {
-            val = false;
-        }
+//        if (user.getUser().getObject(2).equals(name) && user.getUser().getObject(2).equals(password))
+//
+//        {
+//            val = true;
+//        } else {
+//            val = false;
+//        }
 
         return val;
 

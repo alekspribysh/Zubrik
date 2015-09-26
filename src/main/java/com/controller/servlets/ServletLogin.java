@@ -1,5 +1,6 @@
 package com.controller.servlets;
 
+import com.service.UserService;
 import com.service.ValidateUser;
 
 import javax.servlet.ServletException;
@@ -14,10 +15,11 @@ import java.sql.SQLException;
 /**
  * Created by alekspribysh on 9/21/15.
  */
-@WebServlet(urlPatterns = {"/login"})
+@WebServlet("/login")
 public class ServletLogin extends HttpServlet {
 
     ValidateUser valid = new ValidateUser();
+    UserService service = new UserService();
     private String name;
     private String password1;
 

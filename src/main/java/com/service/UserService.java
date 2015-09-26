@@ -2,6 +2,7 @@ package com.service;
 
 import com.dao.UserDao;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -10,6 +11,8 @@ import java.sql.SQLException;
 public class UserService {
 
     UserDao userDao = new UserDao();
+    ResultSet result;
+
 
     public void createUser() throws SQLException {
         if (userDao.getConn() == null) {
@@ -22,14 +25,21 @@ public class UserService {
 
     }
 
-    public void getUser() throws SQLException {
+    public ResultSet getUser() throws SQLException {
+
         if (userDao.getConn() == null){
             userDao.connect();
             userDao.getUser();
+
+
         }
         else {
             userDao.getUser();
+
+
         }
+        return result;
+
     }
 //    public getUser(){}
 //    public deleteUser(){}

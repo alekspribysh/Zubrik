@@ -63,7 +63,6 @@ import java.sql.*;
             String output = "User #%d: %s - %s - %s - %s";
             System.out.println(String.format(output, ++count, name, pass, fullname, email));
 
-
         }
 
         return result;
