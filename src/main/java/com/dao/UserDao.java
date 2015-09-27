@@ -47,6 +47,7 @@ public class UserDao {
 
     public ResultSet getUser(String sql) throws SQLException {
         Statement statement = conn.createStatement();
+        //PreparedStatement statement = conn.prepareStatement(sql);
         ResultSet result = statement.executeQuery(sql);
         return result;
 
