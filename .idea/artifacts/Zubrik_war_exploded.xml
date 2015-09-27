@@ -1,0 +1,24 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="Zubrik:war exploded">
+    <output-path>$PROJECT_DIR$/target/appointment</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="Zubrik" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.36" />
+          <element id="library" level="project" name="Maven: org.testng:testng:6.8.21" />
+          <element id="library" level="project" name="Maven: org.beanshell:bsh:2.0b4" />
+          <element id="library" level="project" name="Maven: com.beust:jcommander:1.27" />
+          <element id="library" level="project" name="Maven: com.sun.jersey:jersey-bundle:1.19" />
+          <element id="library" level="project" name="Maven: javax.ws.rs:jsr311-api:1.1.1" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/target/appointment/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="Zubrik/web/Web" />
+    </root>
+  </artifact>
+</component>

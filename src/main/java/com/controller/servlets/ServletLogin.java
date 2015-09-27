@@ -33,7 +33,7 @@ public class ServletLogin extends HttpServlet {
 
         try {
             if (valid.validLoginPassword(name, password1)) {
-                resp.sendRedirect(req.getContextPath() +  "  ");
+                resp.sendRedirect(req.getContextPath() +  "/welcome.html");
 
 
             } else {

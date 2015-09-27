@@ -1,8 +1,6 @@
 package com.service;
 
-import com.dao.UserDao;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 
@@ -10,12 +8,11 @@ import java.util.HashMap;
  * Created by alekspribysh on 9/19/15.
  */
 public class ValidateUser {
-    //UserDao user = new UserDao();
 
     UserService user = new UserService();
     private String login = null;
     private String pass = null;
-    private ResultSet result;
+
 
 
     private boolean val;
@@ -57,23 +54,11 @@ public class ValidateUser {
         return val;
     }
 
-    public boolean validLoginPassword(String name, String password) throws SQLException {
+       public boolean validLoginPassword(String name, String password) throws SQLException {
 
-        String sql = "SELECT * FROM Users where username = '" + name + "' and password = '" + password + "'";
-        result = user.getUser(sql);
+//        String sql = "SELECT * FROM Users where username = '" + name + "' and password = '" + password + "'";
+          user.getUser();
 
-        int count = 0;
-
-        while (result.next()) {
-            login = result.getString(2);
-            pass = result.getString(3);
-            String fullname = result.getString("fullname");
-            String email = result.getString("email");
-            String output = "User #%d: %s - %s - %s - %s";
-            System.out.println(String.format(output, ++count, login, pass, fullname, email));
-
-        }
-        // System.out.println(login + " " + "krutoi");
 
         if (name.equals(login) && password.equals(pass))
 
