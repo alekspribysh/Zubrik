@@ -11,7 +11,6 @@ import java.sql.SQLException;
 public class UserService {
 
     UserDao userDao = new UserDao();
-    ResultSet result;
 
 
     public void createUser() throws SQLException {
@@ -25,16 +24,13 @@ public class UserService {
 
     }
 
-    public ResultSet getUser() throws SQLException {
-
-        if (userDao.getConn() == null){
+    public ResultSet getUser(String sql) throws SQLException {
+        ResultSet result;
+        if (userDao.getConn() == null) {
             userDao.connect();
-            userDao.getUser();
-
-
-        }
-        else {
-            userDao.getUser();
+            result = userDao.getUser(sql);
+        } else {
+            result = userDao.getUser(sql);
 
 
         }

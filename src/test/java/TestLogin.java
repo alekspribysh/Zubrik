@@ -1,5 +1,6 @@
 import com.service.ValidateUser;
 import org.testng.annotations.Test;
+import org.testng.*;
 
 import java.sql.SQLException;
 
@@ -9,13 +10,12 @@ import java.sql.SQLException;
 public class TestLogin {
 
     ValidateUser valid = new ValidateUser();
-    private String name = "bill";
-    private String passcode = "secretpass";
-
+    private String name = "aleks";
+    private String passcode = "aleksandr";
 
     @Test
     public void loginPassword() throws SQLException {
-        valid.validLoginPassword(name, passcode);
 
+        Assert.assertEquals(valid.validLoginPassword(name, passcode), true);
     }
 }

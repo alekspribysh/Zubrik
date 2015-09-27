@@ -5,7 +5,7 @@ import java.sql.*;
 /**
  * Created by alekspribysh on 9/14/15.
  */
-    public class UserDao {
+public class UserDao {
 
     String dbURL = "jdbc:mysql://localhost:3306/sampledb";
     String username = "alex";
@@ -19,7 +19,7 @@ import java.sql.*;
     public void connect() throws SQLException {
         try {
 
-             conn = DriverManager.getConnection(dbURL, username, password);
+            conn = DriverManager.getConnection(dbURL, username, password);
 
             if (conn != null) {
                 System.out.println("Connected");
@@ -34,10 +34,10 @@ import java.sql.*;
         String sql = "INSERT INTO Users (username, password, fullname, email) VALUES (?, ?, ?, ?)";
 
         PreparedStatement statement = conn.prepareStatement(sql);
-        statement.setString(1, "bill");
-        statement.setString(2, "secretpass");
-        statement.setString(3, "Bill Gates");
-        statement.setString(4, "bill.gates@microsoft.com");
+        statement.setString(1, "aleks");
+        statement.setString(2, "aleksandr");
+        statement.setString(3, "Aliaksandr Prybysh");
+        statement.setString(4, "alekspribysh@gmail.com");
 
         int rowsInserted = statement.executeUpdate();
         if (rowsInserted > 0) {
@@ -45,32 +45,12 @@ import java.sql.*;
         }
     }
 
-    public ResultSet getUser() throws SQLException {
-        String sql = "SELECT * FROM Users";
-
-
+    public ResultSet getUser(String sql) throws SQLException {
         Statement statement = conn.createStatement();
         ResultSet result = statement.executeQuery(sql);
-
-        int count = 0;
-
-        while (result.next()){
-            String name = result.getString(2);
-            String pass = result.getString(3);
-            String fullname = result.getString("fullname");
-            String email = result.getString("email");
-
-            String output = "User #%d: %s - %s - %s - %s";
-            System.out.println(String.format(output, ++count, name, pass, fullname, email));
-
-        }
-
         return result;
 
     }
-
-
-
 
 
 //    public createConnection(){}

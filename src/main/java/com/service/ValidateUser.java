@@ -2,6 +2,7 @@ package com.service;
 
 import com.dao.UserDao;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 
@@ -12,6 +13,10 @@ public class ValidateUser {
     //UserDao user = new UserDao();
 
     UserService user = new UserService();
+    private String login = null;
+    private String pass = null;
+    private ResultSet result;
+
 
     private boolean val;
 
@@ -52,33 +57,33 @@ public class ValidateUser {
         return val;
     }
 
-//    public boolean validLoginPassword(String name, String password, HashMap map) {
-//
-//
-//        if (map.containsKey(name) && map.containsValue(password)) {
-//            val = true;
-//        } else {
-//            val = false;
-//        }
-//
-//        return val;
-//
-//
-//    }
-
     public boolean validLoginPassword(String name, String password) throws SQLException {
-        System.out.println(user.getUser());
 
-//        if (user.getUser().getObject(2).equals(name) && user.getUser().getObject(2).equals(password))
-//
-//        {
-//            val = true;
-//        } else {
-//            val = false;
-//        }
+        String sql = "SELECT * FROM Users where username = '" + name + "' and password = '" + password + "'";
+        result = user.getUser(sql);
+
+        int count = 0;
+
+        while (result.next()) {
+            login = result.getString(2);
+            pass = result.getString(3);
+            String fullname = result.getString("fullname");
+            String email = result.getString("email");
+            String output = "User #%d: %s - %s - %s - %s";
+            System.out.println(String.format(output, ++count, login, pass, fullname, email));
+
+        }
+        // System.out.println(login + " " + "krutoi");
+
+        if (name.equals(login) && password.equals(pass))
+
+        {
+            val = true;
+        } else {
+            val = false;
+        }
 
         return val;
-
 
     }
 }

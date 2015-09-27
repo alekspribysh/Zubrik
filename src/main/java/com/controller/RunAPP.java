@@ -10,7 +10,10 @@ import java.sql.SQLException;
 public class RunAPP {
     public static void main(String[] args) throws SQLException {
         UserService run = new UserService();
+        String sql = "SELECT * FROM Users where username = 'bill' and password = 'secretpasss'";
+
         //run.createUser();
-        run.getUser();
+        //run.getUser(sql);
+
     }
 }
