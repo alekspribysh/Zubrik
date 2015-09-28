@@ -8,7 +8,6 @@ import java.sql.*;
 public class UserDao {
 
 
-
     String dbURL = "jdbc:mysql://localhost:3306/sampledb";
     String username = "alex";
     String password = "aleksandr";
@@ -18,18 +17,10 @@ public class UserDao {
         return conn;
     }
 
-    public  void loadDriver () {
-        try {
-
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-        } catch (Exception ex) {
-
-        }
-    }
 
     public void connect() throws SQLException {
         try {
-            loadDriver();
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
 
             conn = DriverManager.getConnection(dbURL, username, password);
 
@@ -38,6 +29,12 @@ public class UserDao {
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
         }
     }
 
@@ -59,7 +56,6 @@ public class UserDao {
 
     public ResultSet getUser(String sql) throws SQLException {
         Statement statement = conn.createStatement();
-        //PreparedStatement statement = conn.prepareStatement(sql);
         ResultSet result = statement.executeQuery(sql);
         return result;
     }
