@@ -3,6 +3,7 @@ package com.service;
 import com.dao.UserDao;
 
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -24,16 +25,17 @@ public class UserService {
 
     }
 
-    public void getUser() throws SQLException {
-
+    public ResultSet getUser(String sql) throws SQLException {
+        ResultSet result;
         if (userDao.getConn() == null) {
             userDao.connect();
-            userDao.getUser();
+            result = userDao.getUser(sql);
         } else {
-            userDao.getUser();
+            result = userDao.getUser(sql);
 
 
         }
+        return result;
 
 
 

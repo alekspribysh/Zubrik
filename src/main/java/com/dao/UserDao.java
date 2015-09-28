@@ -8,6 +8,10 @@ import java.sql.*;
 public class UserDao {
 
 
+
+    String dbURL = "jdbc:mysql://localhost:3306/sampledb";
+    String username = "alex";
+    String password = "aleksandr";
     Connection conn = null;
 
     public Connection getConn() {
@@ -23,14 +27,9 @@ public class UserDao {
         }
     }
 
-
     public void connect() throws SQLException {
-        String dbURL = "jdbc:mysql://localhost:3306/sampledb";
-        String username = "alex";
-        String password = "aleksandr";
-        loadDriver();
-
         try {
+            loadDriver();
 
             conn = DriverManager.getConnection(dbURL, username, password);
 
@@ -39,9 +38,6 @@ public class UserDao {
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
-            System.out.println("SQLException: " + ex.getMessage());
-            System.out.println("SQLState: " + ex.getSQLState());
-            System.out.println("VendorError: " + ex.getErrorCode());
         }
     }
 
@@ -61,24 +57,11 @@ public class UserDao {
         }
     }
 
-    public void  getUser() throws SQLException {
-        String sql = "SELECT * FROM Users";
-
+    public ResultSet getUser(String sql) throws SQLException {
         Statement statement = conn.createStatement();
         //PreparedStatement statement = conn.prepareStatement(sql);
         ResultSet result = statement.executeQuery(sql);
-
-        int count = 0;
-
-        while (result.next()){
-            String name = result.getString(2);
-            String pass = result.getString(3);
-            String fullname = result.getString("fullname");
-            String email = result.getString("email");
-
-            String output = "User #%d: %s - %s - %s - %s";
-            System.out.println(String.format(output, ++count, name, pass, fullname, email));
-        }
+        return result;
     }
 
 
