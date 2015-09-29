@@ -1,7 +1,8 @@
 package com.service;
 
 
-import java.sql.ResultSet;
+import com.model.UserModel;
+
 import java.sql.SQLException;
 import java.util.HashMap;
 
@@ -11,9 +12,10 @@ import java.util.HashMap;
 public class ValidateUser {
 
     UserService user = new UserService();
-    private ResultSet result;
-    private String login = null;
-    private String pass = null;
+    UserModel usermodel = new UserModel();
+    private String login;
+    private String pass;
+
 
 
 
@@ -58,31 +60,13 @@ public class ValidateUser {
 
     public boolean validLoginPassword(String name, String password) throws SQLException {
 
-        String sql = "SELECT * FROM Users where username = '" + name + "' and password = '" + password + "'";
-        result = user.getUser(sql);
+        usermodel.setUsername(name);
+        usermodel.setPassword(password);
 
-        int count = 0;
+        login = user.getUser(usermodel).getUsername();
+        pass = user.getUser(usermodel).getPassword();
 
-        while (result.next()) {
-            login = result.getString(2);
-            pass = result.getString(3);
-            String fullname = result.getString("fullname");
-            String email = result.getString("email");
-            String output = "User #%d: %s - %s - %s - %s";
-            System.out.println(String.format(output, ++count, login, pass, fullname, email));
-
-        }
-        // System.out.println(login + " " + "krutoi");
-
-        if (name.equals(login) && password.equals(pass))
-
-        {
-            val = true;
-        } else {
-            val = false;
-        }
-
-        return val;
+        return (name.equals(login) && password.equals(pass));
 
     }
 }

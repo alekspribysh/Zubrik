@@ -30,15 +30,12 @@ public class ServletRegistration extends HttpServlet{
         password1 = req.getParameter("passwd");
         password2 = req.getParameter("passwd2");
 
-        String servletPath = req.getServletPath();
-
         PrintWriter p = resp.getWriter();
 
         if (valid.loginValidation(name)) {
             if (valid.useExist(name, map)) {
                 if (valid.passwordnValidation(password1)) {
                     if (valid.passwordMatch(password1, password2)) {
-                        // map.put(name, password1);
                         // req.getServletContext().setAttribute(name, true);
                         resp.sendRedirect(req.getContextPath() + "/converter.html");
 

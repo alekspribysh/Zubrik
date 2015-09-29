@@ -19,7 +19,6 @@ import java.sql.SQLException;
 public class ServletLogin extends HttpServlet {
 
     ValidateUser valid = new ValidateUser();
-    UserService service = new UserService();
     private String name;
     private String password1;
 
@@ -29,8 +28,6 @@ public class ServletLogin extends HttpServlet {
         name = req.getParameter("loginParam");
         password1 = req.getParameter("passwd");
 
-        String servletPath = req.getServletPath();
-
         try {
             if (valid.validLoginPassword(name, password1)) {
                 resp.sendRedirect(req.getContextPath() +  "/welcome.html");
@@ -38,7 +35,6 @@ public class ServletLogin extends HttpServlet {
 
             } else {
                 resp.sendRedirect(req.getContextPath() + "/registration.jsp");
-
 
             }
         } catch (SQLException e) {

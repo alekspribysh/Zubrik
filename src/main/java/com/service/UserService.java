@@ -1,9 +1,7 @@
 package com.service;
 
 import com.dao.UserDao;
-
-
-import java.sql.ResultSet;
+import com.model.UserModel;
 import java.sql.SQLException;
 
 /**
@@ -15,27 +13,23 @@ public class UserService {
 
 
     public void createUser() throws SQLException {
+
         if (userDao.getConn() == null) {
             userDao.connect();
-            userDao.createUser();
-        } else {
-            userDao.createUser();
         }
 
+        userDao.createUser();
 
     }
 
-    public ResultSet getUser(String sql) throws SQLException {
-        ResultSet result;
+    public UserModel getUser(UserModel usermodel) throws SQLException {
+
         if (userDao.getConn() == null) {
             userDao.connect();
-            result = userDao.getUser(sql);
-        } else {
-            result = userDao.getUser(sql);
-
-
         }
-        return result;
+
+        return userDao.getUser(usermodel);
+
 
 
     }

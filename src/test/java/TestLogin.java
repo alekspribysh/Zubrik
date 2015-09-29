@@ -10,7 +10,7 @@ import java.sql.SQLException;
 public class TestLogin {
 
     ValidateUser valid = new ValidateUser();
-    private String name = "aleks";
+    private String name = "Aleks";
     private String passcode = "aleksandr";
 
     @Test
