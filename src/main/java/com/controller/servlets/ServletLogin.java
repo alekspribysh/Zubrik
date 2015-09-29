@@ -1,6 +1,4 @@
 package com.controller.servlets;
-
-import com.service.UserService;
 import com.service.ValidateUser;
 
 import javax.servlet.ServletException;
@@ -10,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -18,18 +18,30 @@ import java.sql.SQLException;
 @WebServlet("/login")
 public class ServletLogin extends HttpServlet {
 
+    Map<String, String> messages = new HashMap<String, String>();
     ValidateUser valid = new ValidateUser();
     private String name;
-    private String password1;
+    private String password;
 
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        req.setAttribute("messageMap", messages);
+
         name = req.getParameter("loginParam");
-        password1 = req.getParameter("passwd");
+        password = req.getParameter("passwd");
 
         try {
-            if (valid.validLoginPassword(name, password1)) {
+
+            if (name.isEmpty() || password.isEmpty()){
+                messages.put("fieldIsEmpty", "Fields cannot not be empty");
+                req.getRequestDispatcher("login.jsp").forward(req, resp);
+
+            }
+
+
+            if (valid.validLoginPassword(name, password)) {
                 resp.sendRedirect(req.getContextPath() +  "/welcome.html");
 
 
