@@ -66,15 +66,12 @@ public class UserDao {
         Statement statement = conn.createStatement();
         ResultSet result = statement.executeQuery(sql);
 
-//        int count = 0;
+
         while (result.next()) {
             user.setId(result.getString("user_id"));
             user.setUsername(result.getString("username"));
             user.setPassword(result.getString(3));
-//            String pass = result.getString(3);
-//            String login = result.getString(2);
-//            String fullname = result.getString("fullname");
-//            String email = result.getString("email");
+
 //            String output = "UserModel #%d: %s - %s - %s - %s";
 //            System.out.println(String.format(output, ++count, login, pass, fullname, email));
 

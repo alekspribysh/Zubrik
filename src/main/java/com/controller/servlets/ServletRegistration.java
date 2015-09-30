@@ -32,27 +32,32 @@ public class ServletRegistration extends HttpServlet{
 
         PrintWriter p = resp.getWriter();
 
-        if (valid.loginValidation(name)) {
-            if (valid.useExist(name, map)) {
-                if (valid.passwordnValidation(password1)) {
-                    if (valid.passwordMatch(password1, password2)) {
-                        // req.getServletContext().setAttribute(name, true);
-                        resp.sendRedirect(req.getContextPath() + "/welcome.html");
+//        if (valid.loginValidation(name)) {
+//            if (valid.useExist(name, map)) {
+//                if (valid.passwordnValidation(password1)) {
+//                    if (valid.passwordMatch(password1, password2)) {
+//                        // req.getServletContext().setAttribute(name, true);
+//                        resp.sendRedirect(req.getContextPath() + "/welcome.html");
+//
+//                    } else {
+//                        p.println("Entered passwords doesn't match");
+//                    }
+//                } else {
+//                    p.println("Password should contains at least 5 symbols and at least one diget");
+//                }
+//            } else {
+//                p.println("Entered username already exist. You have to use a different username ");
+//            }
+//        } else {
+//            p.println("Login should be at least 3 symbols");
+//
+//        }
 
-                    } else {
-                        p.println("Entered passwords doesn't match");
-                    }
-                } else {
-                    p.println("Password should contains at least 5 symbols and at least one diget");
-                }
-            } else {
-                p.println("Entered username already exist. You have to use a different username ");
-            }
-        } else {
-            p.println("Login should be at least 3 symbols");
+
+        if (valid.loginValidation(name) && valid.useExist(name,map) &&valid.passwordnValidation(password1)
+                && valid.passwordMatch(password1, password2) ){
 
         }
-
     }
 
 }

@@ -57,8 +57,4 @@ public class UserModel {
         this.id = id;
     }
 
-    //    public userId(){}
-//    public userName(){}
-//    public email(){}
-//    public password(){}
 }
