@@ -34,11 +34,11 @@ public class ServletLogin extends HttpServlet {
 
         try {
 
-            if (name.isEmpty() || password.isEmpty()){
-                messages.put("fieldIsEmpty", "Fields cannot not be empty");
-                req.getRequestDispatcher("login.jsp").forward(req, resp);
-
-            }
+//            if (name.isEmpty() || password.isEmpty()){
+//                messages.put("fieldIsEmpty", "Fields cannot not be empty");
+//                req.getRequestDispatcher("login.jsp").forward(req, resp);
+//
+//            }
 
 
             if (valid.validLoginPassword(name, password)) {

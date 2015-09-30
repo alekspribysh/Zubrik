@@ -14,14 +14,15 @@ import java.util.HashMap;
 /**
  * Created by alekspribysh on 9/21/15.
  */
-@WebServlet("/registration" )
-public class ServletRegistration extends HttpServlet{
+@WebServlet("/registration")
+public class ServletRegistration extends HttpServlet {
 
     ValidateUser valid = new ValidateUser();
     private String name;
     private String password1;
     private String password2;
-    private HashMap<String, String> map = new HashMap<String, String>();
+    private String fullname;
+    private String email;
 
 
     @Override
@@ -29,33 +30,36 @@ public class ServletRegistration extends HttpServlet{
         name = req.getParameter("loginParam");
         password1 = req.getParameter("passwd");
         password2 = req.getParameter("passwd2");
+        fullname = req.getParameter("fullname");
+        email = req.getParameter("email");
 
         PrintWriter p = resp.getWriter();
 
-//        if (valid.loginValidation(name)) {
-//            if (valid.useExist(name, map)) {
-//                if (valid.passwordnValidation(password1)) {
-//                    if (valid.passwordMatch(password1, password2)) {
-//                        // req.getServletContext().setAttribute(name, true);
-//                        resp.sendRedirect(req.getContextPath() + "/welcome.html");
-//
-//                    } else {
-//                        p.println("Entered passwords doesn't match");
-//                    }
-//                } else {
-//                    p.println("Password should contains at least 5 symbols and at least one diget");
-//                }
-//            } else {
-//                p.println("Entered username already exist. You have to use a different username ");
-//            }
-//        } else {
-//            p.println("Login should be at least 3 symbols");
-//
-//        }
 
+        if (valid.loginValidation(name) && valid.useExist(name) && valid.passwordnValidation(password1)
+                && valid.passwordMatch(password1, password2) && !fullname.isEmpty() && !email.isEmpty()) {
+            resp.sendRedirect(req.getContextPath() + "/welcome.html");
 
-        if (valid.loginValidation(name) && valid.useExist(name,map) &&valid.passwordnValidation(password1)
-                && valid.passwordMatch(password1, password2) ){
+        } else {
+            if (!valid.loginValidation(name)) {
+                p.println("Login should be at least 3 symbols");
+            }
+            if (!valid.useExist(name)) {
+                p.println("Entered username already exist. You have to use a different username ");
+            }
+            if (!valid.passwordnValidation(password1)) {
+                p.println("Password should contains at least 5 symbols and at least one diget");
+            }
+            if (!valid.passwordMatch(password1, password2)) {
+                p.println("Entered passwords doesn't match");
+            }
+
+            if (fullname.isEmpty()) {
+                p.println("Field full name can not be empty");
+            }
+            if (email.isEmpty()) {
+                p.println("Field email can not be empty");
+            }
 
         }
     }

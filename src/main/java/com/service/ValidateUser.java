@@ -33,9 +33,9 @@ public class ValidateUser {
         return (password.equals(paswword1));
     }
 
-    public boolean useExist(String name, HashMap map) {
+    public boolean useExist(String name) {
 
-        return (map.containsKey(name));
+        return ("aleks".equals(name));
     }
 
     public boolean validLoginPassword(String name, String password) throws SQLException {

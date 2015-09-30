@@ -6,10 +6,10 @@
 <body>
 
  <H3>Registartion Form</H3>
-<form action="${pageContext.request.contextPath}/login" method="post">
+<form action="${pageContext.request.contextPath}/registration" method="post">
   Login: <input type="text" name="loginParam"/><br>
   Password: <input type="password" name="passwd"/><br>
-  Repeat Password: <input type="repeatpassword" name="passwd2"/><br>
+  Repeat Password: <input type="password" name="passwd2"/><br>
   Full Name: <input type="fullname" name="fullname"/><br>
   Email: <input type="email" name="email"/><br>
   <input type="submit" value="submit"/>
