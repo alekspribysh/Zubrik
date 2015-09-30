@@ -37,7 +37,7 @@ public class ServletRegistration extends HttpServlet{
                 if (valid.passwordnValidation(password1)) {
                     if (valid.passwordMatch(password1, password2)) {
                         // req.getServletContext().setAttribute(name, true);
-                        resp.sendRedirect(req.getContextPath() + "/converter.html");
+                        resp.sendRedirect(req.getContextPath() + "/welcome.html");
 
                     } else {
                         p.println("Entered passwords doesn't match");
