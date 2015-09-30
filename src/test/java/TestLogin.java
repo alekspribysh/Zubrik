@@ -16,6 +16,6 @@ public class TestLogin {
     @Test
     public void loginPassword() throws SQLException {
 
-        //Assert.assertEquals(valid.validLoginPassword(name, passcode), true);
+        Assert.assertEquals(valid.validLoginPassword(name, passcode), true);
     }
 }

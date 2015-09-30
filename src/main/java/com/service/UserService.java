@@ -22,17 +22,18 @@ public class UserService {
 
     }
 
-    public UserModel getUser(UserModel usermodel) throws SQLException {
+    public UserModel getUserByLogPas(UserModel usermodel) throws SQLException {
 
         if (userDao.getConn() == null) {
             userDao.connect();
         }
 
-        return userDao.getUser(usermodel);
-
+        return userDao.getUserByLogPas(usermodel);
 
 
     }
+
+
 
 //    public deleteUser(){}
 //    public addData(){}

@@ -33,18 +33,18 @@ public class ValidateUser {
         return (password.equals(paswword1));
     }
 
-    public boolean useExist(String name) {
-
-        return ("aleks".equals(name));
+    public boolean useExist(String name) throws SQLException {
+        usermodel.setUsername(name);
+        login = user.getUserByLogPas(usermodel).getUsername();
+        return (name.equals(login));
     }
 
     public boolean validLoginPassword(String name, String password) throws SQLException {
 
         usermodel.setUsername(name);
         usermodel.setPassword(password);
-
-        login = user.getUser(usermodel).getUsername();
-        pass = user.getUser(usermodel).getPassword();
+        login = user.getUserByLogPas(usermodel).getUsername();
+        pass = user.getUserByLogPas(usermodel).getPassword();
 
         return (name.equals(login) && password.equals(pass));
 

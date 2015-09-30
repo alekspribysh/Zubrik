@@ -56,7 +56,7 @@ public class UserDao {
         }
     }
 
-    public UserModel getUser(UserModel usermodel) throws SQLException {
+    public UserModel getUserByLogPas(UserModel usermodel) throws SQLException {
 
         UserModel user = new UserModel();
 
@@ -69,8 +69,10 @@ public class UserDao {
 
         while (result.next()) {
             user.setId(result.getString("user_id"));
-            user.setUsername(result.getString("username"));
+            user.setUsername(result.getString(1));
+            user.setPassword(result.getString(2));
             user.setPassword(result.getString(3));
+            user.setEmail(result.getString(4));
 
 //            String output = "UserModel #%d: %s - %s - %s - %s";
 //            System.out.println(String.format(output, ++count, login, pass, fullname, email));
