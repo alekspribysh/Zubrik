@@ -9,11 +9,8 @@ import java.sql.*;
  */
 public class UserDao {
 
-
-    String dbURL = "jdbc:mysql://localhost:3306/sampledb";
-    String username = "alex";
-    String password = "aleksandr";
     Connection conn = null;
+    UserModel user = new UserModel();
 
     public Connection getConn() {
         return conn;
@@ -21,6 +18,10 @@ public class UserDao {
 
 
     public void connect() throws SQLException {
+        String dbURL = "jdbc:mysql://localhost:3306/sampledb";
+        String username = "alex";
+        String password = "aleksandr";
+
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
 
@@ -40,25 +41,27 @@ public class UserDao {
         }
     }
 
-    public void createUser() throws SQLException {
+    public boolean createUser(UserModel userModel) throws SQLException {
+        boolean val = false;
 
         String sql = "INSERT INTO Users (username, password, fullname, email) VALUES (?, ?, ?, ?)";
 
         PreparedStatement statement = conn.prepareStatement(sql);
-        statement.setString(1, "aleks");
-        statement.setString(2, "aleksandr");
-        statement.setString(3, "Aliaksandr Prybysh");
-        statement.setString(4, "alekspribysh@gmail.com");
+        statement.setString(1, userModel.getUsername());
+        statement.setString(2, userModel.getPassword());
+        statement.setString(3, userModel.getFullName());
+        statement.setString(4, userModel.getEmail());
 
         int rowsInserted = statement.executeUpdate();
         if (rowsInserted > 0) {
             System.out.println("A new user was inserted successfully!");
+            val = true;
         }
+
+        return val;
     }
 
-    public UserModel getUserByLogPas(UserModel usermodel) throws SQLException {
-
-        UserModel user = new UserModel();
+    public UserModel getUser(UserModel usermodel) throws SQLException {
 
         String sql = "SELECT * FROM Users where username = '" + usermodel.getUsername() + "' and password = '"
                 + usermodel.getPassword() + "'";
@@ -66,14 +69,19 @@ public class UserDao {
         Statement statement = conn.createStatement();
         ResultSet result = statement.executeQuery(sql);
 
+ //       int count = 0;
 
         while (result.next()) {
-            user.setId(result.getString("user_id"));
-            user.setUsername(result.getString(1));
-            user.setPassword(result.getString(2));
+            user.setId(result.getString(1));
+            user.setUsername(result.getString(2));
             user.setPassword(result.getString(3));
-            user.setEmail(result.getString(4));
-
+            user.setFullName(result.getString(4));
+//            user.setEmail(result.getString(5));
+//            String login = result.getString(2);
+//            String pass = result.getString(3);
+//            String fullname = result.getString(4);
+//            String email = result.getString(5);
+//
 //            String output = "UserModel #%d: %s - %s - %s - %s";
 //            System.out.println(String.format(output, ++count, login, pass, fullname, email));
 

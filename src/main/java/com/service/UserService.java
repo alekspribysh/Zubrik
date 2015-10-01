@@ -2,6 +2,7 @@ package com.service;
 
 import com.dao.UserDao;
 import com.model.UserModel;
+
 import java.sql.SQLException;
 
 /**
@@ -11,28 +12,29 @@ public class UserService {
 
     UserDao userDao = new UserDao();
 
+    public boolean createUser(UserModel usermodel) throws SQLException {
 
-    public void createUser() throws SQLException {
 
         if (userDao.getConn() == null) {
             userDao.connect();
         }
 
-        userDao.createUser();
+        return userDao.createUser(usermodel);
+
 
     }
 
-    public UserModel getUserByLogPas(UserModel usermodel) throws SQLException {
+    public UserModel getUser(UserModel usermodel) throws SQLException {
+
 
         if (userDao.getConn() == null) {
             userDao.connect();
         }
 
-        return userDao.getUserByLogPas(usermodel);
+        return userDao.getUser(usermodel);
 
 
     }
-
 
 
 //    public deleteUser(){}

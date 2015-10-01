@@ -1,5 +1,6 @@
 package com.controller.servlets;
 
+import com.service.UserService;
 import com.service.ValidateUser;
 
 import javax.servlet.ServletException;
@@ -19,6 +20,7 @@ import java.util.HashMap;
 public class ServletRegistration extends HttpServlet {
 
     ValidateUser valid = new ValidateUser();
+
     private String name;
     private String password1;
     private String password2;
@@ -38,15 +40,17 @@ public class ServletRegistration extends HttpServlet {
 
 
         try {
-            if (valid.loginValidation(name) && valid.useExist(name) && valid.passwordnValidation(password1)
+            if (valid.loginValidation(name) && !valid.useExist(name) && valid.passwordnValidation(password1)
                     && valid.passwordMatch(password1, password2) && !fullname.isEmpty() && !email.isEmpty()) {
-                resp.sendRedirect(req.getContextPath() + "/welcome.html");
+                if (valid.validAddUser(name, password1, fullname, email)) {
+                    resp.sendRedirect(req.getContextPath() + "/welcome.html");
+                }
 
             } else {
                 if (!valid.loginValidation(name)) {
                     p.println("Login should be at least 3 symbols");
                 }
-                if (!valid.useExist(name)) {
+                if (valid.useExist(name)) {
                     p.println("Entered username already exist. You have to use a different username ");
                 }
                 if (!valid.passwordnValidation(password1)) {

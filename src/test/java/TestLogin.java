@@ -10,12 +10,20 @@ import java.sql.SQLException;
 public class TestLogin {
 
     ValidateUser valid = new ValidateUser();
-    private String name = "Aleks";
+    private String name = "aleks";
     private String passcode = "aleksandr";
+    private String fullName = "Aliaksandr Prybysh";
+    private String email = "aleks@gmail";
 
     @Test
-    public void loginPassword() throws SQLException {
+    public void log_in() throws SQLException {
 
-        Assert.assertEquals(valid.validLoginPassword(name, passcode), true);
+       // Assert.assertEquals(valid.validLoginPassword(name, passcode), true);
+    }
+
+    @Test
+    public void createUser() throws SQLException {
+
+        //Assert.assertEquals(valid.validAddUser(name, passcode,fullName, email), true);
     }
 }

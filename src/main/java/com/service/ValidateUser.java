@@ -4,7 +4,7 @@ package com.service;
 import com.model.UserModel;
 
 import java.sql.SQLException;
-import java.util.HashMap;
+
 
 /**
  * Created by alekspribysh on 9/19/15.
@@ -35,7 +35,7 @@ public class ValidateUser {
 
     public boolean useExist(String name) throws SQLException {
         usermodel.setUsername(name);
-        login = user.getUserByLogPas(usermodel).getUsername();
+        login = user.getUser(usermodel).getUsername();
         return (name.equals(login));
     }
 
@@ -43,10 +43,21 @@ public class ValidateUser {
 
         usermodel.setUsername(name);
         usermodel.setPassword(password);
-        login = user.getUserByLogPas(usermodel).getUsername();
-        pass = user.getUserByLogPas(usermodel).getPassword();
+        login = user.getUser(usermodel).getUsername();
+        pass = user.getUser(usermodel).getPassword();
 
         return (name.equals(login) && password.equals(pass));
 
+    }
+
+
+    public boolean validAddUser(String username, String pass, String fullName, String email) throws SQLException {
+
+        usermodel.setUsername(username);
+        usermodel.setPassword(pass);
+        usermodel.setFullName(fullName);
+        usermodel.setEmail(email);
+
+        return user.createUser(usermodel);
     }
 }

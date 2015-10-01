@@ -1,4 +1,5 @@
 package com.controller.servlets;
+
 import com.service.ValidateUser;
 
 import javax.servlet.ServletException;
@@ -42,7 +43,7 @@ public class ServletLogin extends HttpServlet {
 
 
             if (valid.validLoginPassword(name, password)) {
-                resp.sendRedirect(req.getContextPath() +  "/welcome.html");
+                resp.sendRedirect(req.getContextPath() + "/welcome.html");
 
 
             } else {
