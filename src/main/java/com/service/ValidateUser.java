@@ -3,8 +3,6 @@ package com.service;
 
 import com.model.UserModel;
 
-import java.sql.SQLException;
-
 
 /**
  * Created by alekspribysh on 9/19/15.
@@ -33,13 +31,13 @@ public class ValidateUser {
         return (password.equals(paswword1));
     }
 
-    public boolean useExist(String name) throws SQLException {
+    public boolean useExist(String name) {
         usermodel.setUsername(name);
         login = user.getUser(usermodel).getUsername();
         return (name.equals(login));
     }
 
-    public boolean validLoginPassword(String name, String password) throws SQLException {
+    public boolean validLoginPassword(String name, String password) {
 
         usermodel.setUsername(name);
         usermodel.setPassword(password);
@@ -51,7 +49,7 @@ public class ValidateUser {
     }
 
 
-    public boolean validAddUser(String username, String pass, String fullName, String email) throws SQLException {
+    public boolean validAddUser(String username, String pass, String fullName, String email) {
 
         usermodel.setUsername(username);
         usermodel.setPassword(pass);
@@ -59,5 +57,6 @@ public class ValidateUser {
         usermodel.setEmail(email);
 
         return user.createUser(usermodel);
+
     }
 }

@@ -17,7 +17,7 @@ public class UserDao {
     }
 
 
-    public void connect() throws SQLException {
+    public void connect() {
         String dbURL = "jdbc:mysql://localhost:3306/sampledb";
         String username = "alex";
         String password = "aleksandr";
@@ -41,41 +41,48 @@ public class UserDao {
         }
     }
 
-    public boolean createUser(UserModel userModel) throws SQLException {
+    public boolean createUser(UserModel userModel) {
         boolean val = false;
 
         String sql = "INSERT INTO Users (username, password, fullname, email) VALUES (?, ?, ?, ?)";
 
-        PreparedStatement statement = conn.prepareStatement(sql);
-        statement.setString(1, userModel.getUsername());
-        statement.setString(2, userModel.getPassword());
-        statement.setString(3, userModel.getFullName());
-        statement.setString(4, userModel.getEmail());
+        try {
 
-        int rowsInserted = statement.executeUpdate();
-        if (rowsInserted > 0) {
-            System.out.println("A new user was inserted successfully!");
-            val = true;
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(1, userModel.getUsername());
+            statement.setString(2, userModel.getPassword());
+            statement.setString(3, userModel.getFullName());
+            statement.setString(4, userModel.getEmail());
+
+            int rowsInserted = statement.executeUpdate();
+            if (rowsInserted > 0) {
+                System.out.println("A new user was inserted successfully!");
+                val = true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return val;
     }
 
-    public UserModel getUser(UserModel usermodel) throws SQLException {
+    public UserModel getUser(UserModel usermodel) {
 
         String sql = "SELECT * FROM Users where username = '" + usermodel.getUsername() + "' and password = '"
                 + usermodel.getPassword() + "'";
 
-        Statement statement = conn.createStatement();
-        ResultSet result = statement.executeQuery(sql);
+        try {
+            Statement statement = conn.createStatement();
+            ResultSet result = statement.executeQuery(sql);
 
- //       int count = 0;
+            //       int count = 0;
 
-        while (result.next()) {
-            user.setId(result.getString(1));
-            user.setUsername(result.getString(2));
-            user.setPassword(result.getString(3));
-            user.setFullName(result.getString(4));
+
+            while (result.next()) {
+                user.setId(result.getString(1));
+                user.setUsername(result.getString(2));
+                user.setPassword(result.getString(3));
+                user.setFullName(result.getString(4));
 //            user.setEmail(result.getString(5));
 //            String login = result.getString(2);
 //            String pass = result.getString(3);
@@ -85,7 +92,12 @@ public class UserDao {
 //            String output = "UserModel #%d: %s - %s - %s - %s";
 //            System.out.println(String.format(output, ++count, login, pass, fullname, email));
 
+            }
+        } catch (SQLException e) {
+
+            e.printStackTrace();
         }
+
 
         return user;
     }

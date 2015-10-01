@@ -12,7 +12,7 @@ public class UserService {
 
     UserDao userDao = new UserDao();
 
-    public boolean createUser(UserModel usermodel) throws SQLException {
+    public boolean createUser(UserModel usermodel) {
 
 
         if (userDao.getConn() == null) {
@@ -24,7 +24,7 @@ public class UserService {
 
     }
 
-    public UserModel getUser(UserModel usermodel) throws SQLException {
+    public UserModel getUser(UserModel usermodel) {
 
 
         if (userDao.getConn() == null) {
