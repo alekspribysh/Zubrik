@@ -21,6 +21,12 @@ public class ServletLogin extends HttpServlet {
     Map<String, String> messages = new HashMap<String, String>();
     ValidateUser valid = new ValidateUser();
 
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        resp.sendRedirect(req.getContextPath() + "/login.jsp");
+    }
+
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

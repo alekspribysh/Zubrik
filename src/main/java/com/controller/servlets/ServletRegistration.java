@@ -20,6 +20,13 @@ public class ServletRegistration extends HttpServlet {
 
     ValidateUser valid = new ValidateUser();
 
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        resp.sendRedirect(req.getContextPath() + "/registrtion.jsp");
+    }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
