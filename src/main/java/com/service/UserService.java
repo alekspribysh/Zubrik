@@ -1,5 +1,6 @@
 package com.service;
 
+import com.dao.DaoConnec;
 import com.dao.UserDao;
 import com.model.UserModel;
 
@@ -10,12 +11,13 @@ import com.model.UserModel;
 public class UserService {
 
     UserDao userDao = new UserDao();
+    DaoConnec conn = new DaoConnec();
 
     public boolean createUser(UserModel usermodel) {
 
 
-        if (userDao.getConn() == null) {
-            userDao.connect();
+        if (conn.getConn() == null) {
+            conn.connect();
         }
 
         return userDao.createUser(usermodel);
@@ -26,8 +28,8 @@ public class UserService {
     public UserModel getUser(UserModel usermodel) {
 
 
-        if (userDao.getConn() == null) {
-            userDao.connect();
+        if (conn.getConn() == null) {
+            conn.connect();
         }
 
         return userDao.getUser(usermodel);
